@@ -36,5 +36,5 @@ Le modèle à états séparés par rôle atteint 100 % de séquences de tags val
 - `src/evaluate.py` : évaluation synthétique et graphique.
 - `src/evaluate_real.py` : comparaison sur UD English EWT.
 - `results/` : sorties calculées des évaluations.
-- `report/rapport_lab03.pdf` : rapport français d’une page.
+- `report/farahi_abderahim_rapport_lab03.pdf` : rapport français avec résultats et captures d’écran de l’application.
 - `screenshots/` : captures de l’application.
