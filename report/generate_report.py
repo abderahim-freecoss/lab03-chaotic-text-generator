@@ -7,7 +7,7 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
-from reportlab.platypus import Image, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -91,21 +91,7 @@ story = [
               "EWT compte 17 étiquettes, 16 654 mots connus à l’entraînement et 10 359 séquences d’étiquettes distinctes : la langue réelle est bien moins régulière et contient des mots absents de l’apprentissage. "
               f"La mesure actuelle est {pct(hmm['accuracy'])} alors que le guide indique 88,1 %; l’écart de 0,1 point est conservé tel qu’observé. Le HMM ne dépasse le tagueur majoritaire que d’environ 1,9 point.", styles["BodyFr"]),
     Paragraph("Limite : les métriques structurelles sont définies par rapport aux 16 patrons du corpus synthétique et ne mesurent pas la qualité de l’anglais réel.", styles["SmallFr"]),
-    PageBreak(),
-    Paragraph("Captures de l’application", styles["TitleFr"]),
-    Paragraph("Interface du générateur et test du tagueur Viterbi avec un mot hors vocabulaire.", styles["Sub"]),
 ]
-
-# Keep both application captures together on a dedicated page so they remain
-# large enough to read without making the results page cramped.
-shot_width, shot_height = 150 * mm, 102.1 * mm
-for filename, caption in [
-    ("01_generation.png", "Génération de phrases et métriques"),
-    ("02_taggueur_mot_inconnu.png", "Tagueur Viterbi et détection d’un mot inconnu"),
-]:
-    img = Image(str(ROOT / "screenshots" / filename), width=shot_width, height=shot_height)
-    img.hAlign = "CENTER"
-    story.extend([img, Paragraph(caption, styles["SmallFr"]), Spacer(1, 2 * mm)])
 
 doc = SimpleDocTemplate(str(OUT), pagesize=A4, rightMargin=15*mm, leftMargin=15*mm,
                         topMargin=12*mm, bottomMargin=12*mm, title="Rapport Lab 03 — Farahi Abderahim")
